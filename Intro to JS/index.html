@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+    <script>
+        function initialize()
+        {
+            num1 = 3;
+            num2 = 7;
+            outputDiv = document.getElementById("divout");
+            myDiv = document.getElementById("test_div");
+            myDiv.innerHTML = "The text is changed.";
+            numberOutput = document.getElementById("numberout");
+            negativeButton = document.getElementById("negativebtn");
+            myNumber = 0;
+            negativesAllowed = false;
+            display();
+        }
+        function display()
+        {
+            numberOutput.innerHTML = myNumber;
+            if (!negativesAllowed)
+            {
+                negativeButton.innerHTML = "Negatives are OFF";
+            }
+            else
+            {
+                negativeButton.innerHTML = "Negatives are ON"; 
+            }
+        }
+        function toggleNegatives()
+        {
+            negativesAllowed = !negativesAllowed;
+            display();
+        }
+        function clickResponse()
+        {
+            outputDiv.innerHTML = "Now you've clicked the button.";
+        }
+        function shoutTen()
+        {
+            console.log("10!");
+        }
+        function addNumbers()
+        {
+            var result = num1 + num2;
+            console.log(result);
+        }
+        function addOne()
+        {
+            myNumber++;
+            display();
+        }
+        function subtractOne()
+        {
+            myNumber--;
+            if (myNumber < 0 && !negativesAllowed)
+            {
+                myNumber = 0;
+            }
+            
+            display();
+        }
+        function greet()
+        {
+            console.log("Hello World");
+        }
+        greet();
+    </script>
+</head>
+<body onload="initialize(); greet();    ">
+    <h1 id="numberout">Intro</h1>
+    <hr />
+    <div>
+        <b>Hello</b>
+        <i>Italics</i>
+        <span>Monkey</span>
+        You have not clicked the butotn.
+    </div>
+    <div id="test_div">
+        
+    </div>
+    <p>
+        &lt; div &gt;
+        &#161;
+    </p>
+    <div id="divout">
+        You have not clicked the button.
+    </div>
+    <button onclick="clickResponse();">Click Me!</button>
+    <button onclick="addNumbers();">Add the 2 numbers</button>
+    <button onclick="shoutTen();">Shout 10</button>
+    <button onclick="addOne();">Add</button>
+    <button id="negativebtn" onclick="toggleNegatives();">Negatives are off</button>
+    <button onclick="subtractOne();">Subtract</button>
+
+   
+</body>
+</html>
