@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body
+        {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            text-align: center;
+        }
+        .wrapper
+        {
+            display: grid;
+            justify-content: center;
+            height: 50%;
+            grid-template-columns: repeat(2, minmax(100px, 300px));
+        }
+        .impt-btn
+        {
+            background-color: rgb(196, 208, 219);
+        }
+        .impt-btn:hover
+        {
+            background-color: gray;
+        }
+    </style>
+    <script>
+        function initialize()
+        {
+            messageOutput = document.getElementById("output");
+            guessOutput = document.getElementById("guess");
+            turnOuput = document.getElementById("turn");
+            turn = 1;
+            guess = "";
+            answer = getCode();
+            turnOuput.innerHTML = "Turn: " + turn + "/7";
+            message = "";
+        }
+        function getCode()
+        {
+            code = "";
+            for (let i = 0; i < 3; i++)
+            {
+                code += Math.floor(Math.random() * 10).toString();
+            }
+            return code;
+        }
+        function display()
+        {
+            guessOutput.innerHTML = guess;
+        }
+        function checkGuess()
+        {
+            turnOuput.innerHTML = "Turn: " + turn + "/7";
+            console.log(guess);
+            if (turn >= 7)
+            {
+                messageOutput.innerHTML = "You lost. The correct code was " + answer;
+                disableBtns();
+            }
+            else
+            {   
+                if (parseInt(guess) > parseInt(code))
+                {
+                    messageOutput.innerHTML = "Code is lower";
+                }
+                else if (parseInt(guess) < parseInt(code))
+                {
+                    messageOutput.innerHTML = "Code is higher"
+                }
+                else
+                {
+                    messageOutput.innerHTML = "You got it correct." + " The code was " + answer;
+                    disableBtns(); 
+                }
+            }
+            guess = "";
+            display();
+        }
+        function disableBtns()
+        {
+            for (let i = 0; i < document.getElementsByTagName("button").length; i++)
+            {
+                document.getElementsByTagName("button")[i].disabled = true;
+            }
+        }
+        function addCharacter(ch)
+        {
+            if (guess.length < 3)
+            {
+                guess += ch;
+                display(); 
+            }
+           
+        }
+        function Clear()
+        {
+            guess = "";
+            display();
+        }
+        function Submit()
+        {
+            if (guess.length >= 3)
+            {
+                turn++;
+                checkGuess();
+            }
+        }
+    </script>
+    <title>CodeBreaker</title>
+</head>
+<body onload="initialize();">
+    <h1 id="output"></h1>
+    <h1 id="turn"></h1>
+    <h1 id="guess"></h1>
+
+    <div class="wrapper">
+        <button onclick="addCharacter('0');">0</button>
+        <button onclick="addCharacter('1');">1</button>
+        <button onclick="addCharacter('2');">2</button>
+        <button onclick="addCharacter('3');">3</button>
+        <button onclick="addCharacter('4');">4</button>
+        <button onclick="addCharacter('5');">5</button>
+        <button onclick="addCharacter('6');">6</button>
+        <button onclick="addCharacter('7');">7</button>
+        <button onclick="addCharacter('8');">8</button>
+        <button onclick="addCharacter('9');">9</button>
+        <button class="impt-btn" onclick="Clear();">Clear</button>
+        <button class="impt-btn" onclick="Submit();">Submit</button>
+    </div>
+</body>
+</html>
